@@ -1,12 +1,12 @@
 package katas;
 
+
 import com.google.common.collect.ImmutableMap;
 import model.BoxArt;
 import model.MovieList;
 import util.DataUtil;
 import java.util.List;
 import java.util.Map;
-import java.util.Objects;
 import java.util.function.Predicate;
 import java.util.stream.Collectors;
 
@@ -22,15 +22,12 @@ public class Kata4 {
     public static List<Map> execute() {
         List<MovieList> movieLists = DataUtil.getMovieLists();
 
-        List<Map> result = movieLists.stream()
-                .flatMap(f -> f.getVideos()
-                        .stream()).map(m -> {
-                            Predicate<BoxArt> boxArtPredicate = b -> Objects.equals(b.getHeight(), Height) && b.getWidth() == Width;
-                            BoxArt boxArtSelected = m.getBoxarts().stream().filter(boxArtPredicate).findAny().get();
-                            return ImmutableMap.of("id", m.getId(), "title", m.getTitle(), "boxart",
-                                    boxArtSelected);
-                        })
-                .collect(Collectors.toList());
+        List<Map> result = movieLists.stream().flatMap(f -> f.getVideos().stream()).map(m -> {
+            Predicate<BoxArt> boxArtPredicate = b -> b.getHeight().equals(Height) && b.getWidth().equals(Width);
+            BoxArt boxArtSelected = m.getBoxarts().stream().filter(boxArtPredicate).findAny().get();
+            return ImmutableMap.of("id", m.getId(), "title", m.getTitle(), "boxart",
+                    boxArtSelected);
+        }).collect(Collectors.toList());
 
         System.out.println(result);
         return result;
