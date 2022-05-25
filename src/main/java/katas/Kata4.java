@@ -24,9 +24,9 @@ public class Kata4 {
 
         List<Map> result = movieLists.stream().flatMap(f -> f.getVideos().stream()).map(m -> {
             Predicate<BoxArt> boxArtPredicate = b -> b.getHeight().equals(Height) && b.getWidth().equals(Width);
-            BoxArt boxArtSelected = m.getBoxarts().stream().filter(boxArtPredicate).findAny().get();
+            BoxArt boxArtSelec = m.getBoxarts().stream().filter(boxArtPredicate).findAny().get();
             return ImmutableMap.of("id", m.getId(), "title", m.getTitle(), "boxart",
-                    boxArtSelected);
+                    boxArtSelec);
         }).collect(Collectors.toList());
 
         System.out.println(result);

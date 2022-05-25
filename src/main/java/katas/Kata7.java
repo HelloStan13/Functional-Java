@@ -17,7 +17,7 @@ import java.util.Map;
 */
 public class Kata7 {
     public static List<Map> execute() {
-        List<MovieList> movieLists = DataUtil.getMovieLists();
+        List<MovieList> movieSmallest = DataUtil.getMovieLists();
 
         return ImmutableList.of(ImmutableMap.of("id", 5, "title", "Bad Boys", "boxart", "url"));
     }
