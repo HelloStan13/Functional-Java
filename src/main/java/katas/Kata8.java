@@ -23,6 +23,6 @@ public class Kata8 {
 
         // StreamUtils.zip()
 
-        return ImmutableList.of(ImmutableMap.of("videoId", 5, "bookmarkId", 3));
+        return ImmutableList.of(ImmutableMap.of("videoId", 4, "bookmarkId", 3));
     }
 }
