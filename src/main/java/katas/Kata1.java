@@ -16,9 +16,11 @@ import java.util.stream.Collectors;
 public class Kata1 {
     public static List<Map> execute() {
         List<Movie> movies = DataUtil.getMovies();
-        List<Map> result = movies.stream().map(mp->ImmutableMap.of(mp.getId(), mp.getTitle()))
+        List<Map> result = movies.stream()
+                .map(mp->ImmutableMap.of(mp.getId(), mp.getTitle()))
                 .collect(Collectors.toList());
         System.out.println(result);
         return result;
+        //        return ImmutableList.of(ImmutableMap.of("id", 5, "title", "Bad Boys"));
     }
 }
