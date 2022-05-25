@@ -22,5 +22,18 @@ public class Kata4 {
     public static List<Map> execute() {
         List<MovieList> movieLists = DataUtil.getMovieLists();
 
+        List<Map> result = movieLists.stream()
+                .flatMap(f -> f.getVideos()
+                        .stream()).map(m -> {
+                            Predicate<BoxArt> boxArtPredicate = b -> Objects.equals(b.getHeight(), Height) && b.getWidth() == Width;
+                            BoxArt boxArtSelected = m.getBoxarts().stream().filter(boxArtPredicate).findAny().get();
+                            return ImmutableMap.of("id", m.getId(), "title", m.getTitle(), "boxart",
+                                    boxArtSelected);
+                        })
+                .collect(Collectors.toList());
+
+        System.out.println(result);
+        return result;
+//        return ImmutableList.of(ImmutableMap.of("id", 5, "title", "Bad Boys", "boxart", new BoxArt(150, 200, "url")));
     }
 }
