@@ -14,4 +14,8 @@ Java8-functional-Katas
 - Kata 10: Transforming a data structure
 - Kata 11: Transforming a more complex data structure
 
+### Katas Solved
+![katas](https://user-images.githubusercontent.com/92740455/170403753-66d86c33-0cb4-4fec-886c-1a0c8ac0b234.jpg)
+
+
 ### ❤️ por  [Adryan Ynfante](https://github.com/HelloStan13)
