@@ -1,11 +1,10 @@
 package katas;
 
-import com.google.common.collect.ImmutableList;
 import com.google.common.collect.ImmutableMap;
 import util.DataUtil;
-
 import java.util.List;
 import java.util.Map;
+import java.util.stream.Collectors;
 
 /*
     Goal: Create a datastructure from the given data:
@@ -58,13 +57,22 @@ import java.util.Map;
 */
 public class Kata11 {
     public static List<Map> execute() {
-        List<Map> lists = DataUtil.getLists();
-        List<Map> videos = DataUtil.getVideos();
-        List<Map> boxArts = DataUtil.getBoxArts();
-        List<Map> bookmarkList = DataUtil.getBookmarkList();
-
-        return ImmutableList.of(ImmutableMap.of("name", "someName", "videos", ImmutableList.of(
-                ImmutableMap.of("id", 5, "title", "The Chamber", "time", 123, "boxart", "someUrl")
-        )));
+        return DataUtil.getLists().stream()
+                .map(list -> ImmutableMap.of("name", list.get("name"), "videos",
+                        DataUtil.getVideos().stream()
+                                .filter(video -> video.get("listId").equals(list.get("id")))
+                                .map(video -> ImmutableMap.of("id", video.get("id"), "title", video.get("title"),
+                                        "time", DataUtil.getBookmarkList().stream()
+                                                .filter(bookmark -> bookmark.get("videoId").equals(video.get("id")))
+                                                .map(bookmark -> bookmark.get("time")).findFirst(),
+                                        "boxart", DataUtil.getBoxArts().stream()
+                                                .filter(boxart -> boxart.get("videoId").equals(video.get("id")))
+                                                .reduce((min, box) -> {
+                                                    int mSize = (Integer) min.get("width") * (Integer) min.get("height");
+                                                    int bSize = (Integer) box.get("width") * (Integer) box.get("height");
+                                                    return (bSize < mSize) ? box : min;
+                                                }).map(boxart -> boxart.get("url"))))
+                                .collect(Collectors.toList())))
+                .collect(Collectors.toList());
     }
 }
