@@ -21,8 +21,8 @@ public class Kata8 {
 
         return StreamUtils
                 .zip(movies.stream(), bookMarks.stream(),
-                        (movie, bookMark) -> ImmutableMap.of("videoId",
-                                movie.getId(), "bookmarkId", bookMark.getId()))
+                        (mVideo, bookMark) -> ImmutableMap.of("videoId",
+                                mVideo.getId(), "bookmarkId", bookMark.getId()))
                 .collect(Collectors.toList());
     }
 }

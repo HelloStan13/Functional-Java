@@ -66,12 +66,13 @@ public class Kata11 {
                                                 .filter(bookmark -> bookmark.get("videoId").equals(video.get("id")))
                                                 .map(bookmark -> bookmark.get("time")).findFirst(),
                                         "boxart", DataUtil.getBoxArts().stream()
-                                                .filter(boxart -> boxart.get("videoId").equals(video.get("id")))
+                                                .filter(boxarts -> boxarts.get("videoId").equals(video.get("id")))
                                                 .reduce((min, box) -> {
                                                     int mSize = (Integer) min.get("width") * (Integer) min.get("height");
                                                     int bSize = (Integer) box.get("width") * (Integer) box.get("height");
                                                     return (bSize < mSize) ? box : min;
-                                                }).map(boxart -> boxart.get("url"))))
+                                                })
+                                                .map(boxarts -> boxarts.get("url"))))
                                 .collect(Collectors.toList())))
                 .collect(Collectors.toList());
     }
